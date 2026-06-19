@@ -10,6 +10,65 @@ function Home() {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const departmentOptions = {
+    cse: "Computer Science Engineering",
+    mechanical: "Mechanical Engineering",
+    civil: "Civil Engineering",
+    electrical: "Electrical Engineering",
+    extc: "Electronics & Telecommunication Engineering",
+    production: "Production Engineering",
+    chemical: "Chemical Engineering",
+    biomedical: "Biomedical Engineering",
+  };
+
+  const roleOptions = {
+    cse: {
+      softwareEngineer: "Software Engineer",
+      cloudEngineer: "Cloud Engineer",
+      dataAnalyst: "Data Analyst",
+      mlEngineer: "Machine Learning Engineer",
+    },
+
+    mechanical: {
+      designEngineer: "Design Engineer",
+      productionEngineer: "Production Engineer",
+      qualityEngineer: "Quality Engineer",
+    },
+
+    civil: {
+      siteEngineer: "Site Engineer",
+      structuralEngineer: "Structural Engineer",
+      planningEngineer: "Planning Engineer",
+    },
+
+    electrical: {
+      powerSystemsEngineer: "Power Systems Engineer",
+      automationEngineer: "Automation Engineer",
+      electricalDesignEngineer: "Electrical Design Engineer",
+    },
+
+    extc: {
+      embeddedEngineer: "Embedded Engineer",
+      vlsiEngineer: "VLSI Engineer",
+      telecomEngineer: "Telecommunication Engineer",
+    },
+
+    production: {
+      manufacturingEngineer: "Manufacturing Engineer",
+      operationsEngineer: "Operations Engineer",
+    },
+
+    chemical: {
+      processEngineer: "Process Engineer",
+      plantEngineer: "Plant Engineer",
+    },
+
+    biomedical: {
+      clinicalEngineer: "Clinical Engineer",
+      biomedicalDesignEngineer: "Biomedical Design Engineer",
+    },
+  };
+
   const handleAnalyze = async () => {
     if (!resume) {
       alert("Please select a resume first.");
@@ -49,54 +108,6 @@ function Home() {
     }
   };
 
-  const roleOptions = {
-    cse: [
-      "softwareEngineer",
-      "cloudEngineer",
-      "dataAnalyst",
-      "mlEngineer",
-    ],
-
-    mechanical: [
-      "designEngineer",
-      "productionEngineer",
-      "qualityEngineer",
-    ],
-
-    civil: [
-      "siteEngineer",
-      "structuralEngineer",
-      "planningEngineer",
-    ],
-
-    electrical: [
-      "powerSystemsEngineer",
-      "automationEngineer",
-      "electricalDesignEngineer",
-    ],
-
-    extc: [
-      "embeddedEngineer",
-      "vlsiEngineer",
-      "telecomEngineer",
-    ],
-
-    production: [
-      "manufacturingEngineer",
-      "operationsEngineer",
-    ],
-
-    chemical: [
-      "processEngineer",
-      "plantEngineer",
-    ],
-
-    biomedical: [
-      "clinicalEngineer",
-      "biomedicalDesignEngineer",
-    ],
-  };
-
   return (
     <>
       <Navbar />
@@ -129,14 +140,11 @@ function Home() {
         >
           <option value="">Select Department</option>
 
-          <option value="cse">Computer Science</option>
-          <option value="mechanical">Mechanical</option>
-          <option value="civil">Civil</option>
-          <option value="electrical">Electrical</option>
-          <option value="extc">EXTC</option>
-          <option value="production">Production</option>
-          <option value="chemical">Chemical</option>
-          <option value="biomedical">Biomedical</option>
+          {Object.entries(departmentOptions).map(([key, value]) => (
+            <option key={key} value={key}>
+              {value}
+            </option>
+          ))}
         </select>
 
         <br />
@@ -150,11 +158,13 @@ function Home() {
             >
               <option value="">Select Role</option>
 
-              {roleOptions[department].map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
+              {Object.entries(roleOptions[department]).map(
+                ([key, value]) => (
+                  <option key={key} value={key}>
+                    {value}
+                  </option>
+                )
+              )}
             </select>
 
             <br />
@@ -184,11 +194,13 @@ function Home() {
             </p>
 
             <p>
-              <strong>Department:</strong> {department}
+              <strong>Department:</strong>{" "}
+              {departmentOptions[department]}
             </p>
 
             <p>
-              <strong>Role:</strong> {role}
+              <strong>Role:</strong>{" "}
+              {roleOptions[department]?.[role]}
             </p>
 
             <hr />
