@@ -113,142 +113,327 @@ function Home() {
       <Navbar />
 
       <div className="container">
-        <h1>AI CareerPrep</h1>
-
-        <p>
-          Upload your resume and get ATS analysis based on your department and role.
-        </p>
-
-        <input
-          type="file"
-          accept=".pdf"
-          onChange={(e) => {
-            setResume(e.target.files[0]);
-            setAnalysis(null);
-          }}
-        />
-
-        <br />
-        <br />
-
-        <select
-          value={department}
-          onChange={(e) => {
-            setDepartment(e.target.value);
-            setRole("");
+        <section
+          style={{
+            textAlign: "center",
+            marginBottom: "3rem",
           }}
         >
-          <option value="">Select Department</option>
+          <div
+            style={{
+              display: "inline-block",
+              padding: "0.5rem 1rem",
+              borderRadius: "999px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.04)",
+              marginBottom: "1.5rem",
+              fontSize: "0.9rem",
+            }}
+          >
+            🚀 AI Powered Resume Intelligence
+          </div>
 
-          {Object.entries(departmentOptions).map(([key, value]) => (
-            <option key={key} value={key}>
-              {value}
-            </option>
-          ))}
-        </select>
+          <h1
+            style={{
+              fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
+              marginBottom: "1rem",
+            }}
+          >
+            AI CareerPrep
+          </h1>
 
-        <br />
-        <br />
-
-        {department && (
-          <>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
-              <option value="">Select Role</option>
-
-              {Object.entries(roleOptions[department]).map(
-                ([key, value]) => (
-                  <option key={key} value={key}>
-                    {value}
-                  </option>
-                )
-              )}
-            </select>
-
-            <br />
-            <br />
-          </>
-        )}
-
-        <button onClick={handleAnalyze} disabled={loading}>
-          {loading ? "Analyzing..." : "Analyze Resume"}
-        </button>
-
-        <br />
-        <br />
-
-        {resume && (
-          <p>
-            Selected File: <strong>{resume.name}</strong>
+          <p
+            style={{
+              maxWidth: "700px",
+              margin: "0 auto",
+              opacity: 0.8,
+              lineHeight: "1.7",
+            }}
+          >
+            Upload your resume, select your engineering department and desired
+            role, and receive an ATS-based analysis with skill matching,
+            missing skills, and extracted resume insights.
           </p>
-        )}
+        </section>
 
-        {analysis && (
-          <div className="resume-card">
-            <h2>Resume Analysis</h2>
+        <div
+          className="resume-card"
+          style={{
+            maxWidth: "850px",
+            margin: "0 auto",
+          }}
+        >
+          <h2 style={{ marginBottom: "2rem" }}>
+            Resume Analysis
+          </h2>
 
-            <p>
-              <strong>Original Name:</strong> {analysis.originalName}
-            </p>
-
-            <p>
-              <strong>Department:</strong>{" "}
-              {departmentOptions[department]}
-            </p>
-
-            <p>
-              <strong>Role:</strong>{" "}
-              {roleOptions[department]?.[role]}
-            </p>
-
-            <hr />
-
-            <h3>ATS Score</h3>
-
-            <p
+          <div style={{ marginBottom: "1.5rem" }}>
+            <label
               style={{
-                fontSize: "32px",
-                fontWeight: "bold",
-                color: "#2563eb",
+                display: "block",
+                marginBottom: "0.75rem",
+                fontWeight: 600,
               }}
             >
-              {analysis.atsScore ?? 0}%
-            </p>
+              Upload Resume (PDF)
+            </label>
 
-            <h3>Matched Skills</h3>
+            <input
+              type="file"
+              accept=".pdf"
+              onChange={(e) => {
+                setResume(e.target.files[0]);
+                setAnalysis(null);
+              }}
+            />
+          </div>
 
-            <ul>
-              {analysis.matchedSkills?.map((skill) => (
-                <li key={skill}>✅ {skill}</li>
+          {resume && (
+            <div
+              style={{
+                marginBottom: "2rem",
+                padding: "1rem",
+                borderRadius: "12px",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              📄 Selected File: <strong>{resume.name}</strong>
+            </div>
+          )}
+
+          <div style={{ marginBottom: "1.5rem" }}>
+            <label
+              style={{
+                display: "block",
+                marginBottom: "0.75rem",
+                fontWeight: 600,
+              }}
+            >
+              Department
+            </label>
+
+            <select
+              value={department}
+              onChange={(e) => {
+                setDepartment(e.target.value);
+                setRole("");
+              }}
+              style={{
+                width: "100%",
+                padding: "14px",
+                borderRadius: "12px",
+              }}
+            >
+              <option value="">Select Department</option>
+
+              {Object.entries(departmentOptions).map(([key, value]) => (
+                <option key={key} value={key}>
+                  {value}
+                </option>
               ))}
-            </ul>
+            </select>
+          </div>
 
-            <h3>Missing Skills</h3>
+          {department && (
+            <div style={{ marginBottom: "2rem" }}>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "0.75rem",
+                  fontWeight: 600,
+                }}
+              >
+                Target Role
+              </label>
 
-            <ul>
-              {analysis.missingSkills?.map((skill) => (
-                <li key={skill}>❌ {skill}</li>
-              ))}
-            </ul>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                style={{
+                  width: "100%",
+                  padding: "14px",
+                  borderRadius: "12px",
+                }}
+              >
+                <option value="">Select Role</option>
 
-            <hr />
+                {Object.entries(roleOptions[department]).map(
+                  ([key, value]) => (
+                    <option key={key} value={key}>
+                      {value}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+          )}
 
-            <h3>Extracted Resume Text</h3>
+          <button
+            onClick={handleAnalyze}
+            disabled={loading}
+            style={{
+              width: "100%",
+              padding: "15px",
+              fontSize: "1rem",
+              fontWeight: "700",
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.8 : 1,
+            }}
+          >
+            {loading ? "Analyzing Resume..." : "Analyze Resume"}
+          </button>
+        </div>
+
+        {analysis && (
+          <div
+            className="resume-card"
+            style={{
+              maxWidth: "850px",
+              margin: "2rem auto 0",
+            }}
+          >
+            <h2 style={{ marginBottom: "2rem" }}>
+              Analysis Results
+            </h2>
 
             <div
               style={{
-                maxHeight: "300px",
-                overflowY: "auto",
-                whiteSpace: "pre-wrap",
-                textAlign: "left",
-                border: "1px solid #ddd",
-                padding: "15px",
-                borderRadius: "8px",
+                display: "grid",
+                gap: "1rem",
+                marginBottom: "2rem",
               }}
             >
-              {analysis.extractedText || "No text found."}
+              <div>
+                <strong>Original Name:</strong>{" "}
+                {analysis.originalName}
+              </div>
+
+              <div>
+                <strong>Department:</strong>{" "}
+                {departmentOptions[department]}
+              </div>
+
+              <div>
+                <strong>Role:</strong>{" "}
+                {roleOptions[department]?.[role]}
+              </div>
+            </div>
+
+            <div
+              style={{
+                textAlign: "center",
+                padding: "2rem",
+                borderRadius: "16px",
+                background: "rgba(37,99,235,0.08)",
+                border: "1px solid rgba(37,99,235,0.2)",
+                marginBottom: "2rem",
+              }}
+            >
+              <h3 style={{ marginBottom: "1rem" }}>
+                ATS Score
+              </h3>
+
+              <div
+                style={{
+                  fontSize: "4rem",
+                  fontWeight: "800",
+                  color: "#2563eb",
+                }}
+              >
+                {analysis.atsScore ?? 0}%
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "1.5rem",
+                marginBottom: "2rem",
+              }}
+            >
+              <div
+                style={{
+                  padding: "1.5rem",
+                  borderRadius: "16px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                <h3 style={{ marginBottom: "1rem" }}>
+                  ✅ Matched Skills
+                </h3>
+
+                {analysis.matchedSkills?.length ? (
+                  <ul>
+                    {analysis.matchedSkills.map((skill) => (
+                      <li
+                        key={skill}
+                        style={{
+                          marginBottom: "0.75rem",
+                        }}
+                      >
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No matched skills found.</p>
+                )}
+              </div>
+
+              <div
+                style={{
+                  padding: "1.5rem",
+                  borderRadius: "16px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                <h3 style={{ marginBottom: "1rem" }}>
+                  ❌ Missing Skills
+                </h3>
+
+                {analysis.missingSkills?.length ? (
+                  <ul>
+                    {analysis.missingSkills.map((skill) => (
+                      <li
+                        key={skill}
+                        style={{
+                          marginBottom: "0.75rem",
+                        }}
+                      >
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No missing skills found.</p>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{ marginBottom: "1rem" }}>
+                Extracted Resume Text
+              </h3>
+
+              <div
+                style={{
+                  maxHeight: "350px",
+                  overflowY: "auto",
+                  whiteSpace: "pre-wrap",
+                  textAlign: "left",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "rgba(255,255,255,0.03)",
+                  padding: "1.5rem",
+                  borderRadius: "16px",
+                  lineHeight: "1.7",
+                }}
+              >
+                {analysis.extractedText || "No text found."}
+              </div>
             </div>
           </div>
         )}
