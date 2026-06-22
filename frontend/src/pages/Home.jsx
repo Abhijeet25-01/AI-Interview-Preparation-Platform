@@ -412,29 +412,53 @@ function Home() {
                   <p>No missing skills found.</p>
                 )}
               </div>
-            </div>
+           </div>
 
-            <div>
-              <h3 style={{ marginBottom: "1rem" }}>
-                Extracted Resume Text
-              </h3>
+<div
+  style={{
+    marginBottom: "2rem",
+    padding: "1.5rem",
+    borderRadius: "16px",
+    background: "rgba(79, 140, 255, 0.08)",
+    border: "1px solid rgba(79, 140, 255, 0.2)",
+  }}
+>
+  <h3 style={{ marginBottom: "1rem" }}>
+    🤖 AI Resume Feedback
+  </h3>
 
-              <div
-                style={{
-                  maxHeight: "350px",
-                  overflowY: "auto",
-                  whiteSpace: "pre-wrap",
-                  textAlign: "left",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  background: "rgba(255,255,255,0.03)",
-                  padding: "1.5rem",
-                  borderRadius: "16px",
-                  lineHeight: "1.7",
-                }}
-              >
-                {analysis.extractedText || "No text found."}
-              </div>
-            </div>
+  <div
+    style={{
+      whiteSpace: "pre-wrap",
+      lineHeight: "1.8",
+    }}
+  >
+    {analysis.aiFeedback}
+  </div>
+</div>
+
+<div>
+  <h3 style={{ marginBottom: "1rem" }}>
+    Extracted Resume Text
+  </h3>
+
+  <div
+    style={{
+      maxHeight: "350px",
+      overflowY: "auto",
+      whiteSpace: "pre-wrap",
+      textAlign: "left",
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "rgba(255,255,255,0.03)",
+      padding: "1.5rem",
+      borderRadius: "16px",
+      lineHeight: "1.7",
+    }}
+  >
+    {analysis.extractedText || "No text found."}
+  </div>
+</div>
+
           </div>
         )}
       </div>
