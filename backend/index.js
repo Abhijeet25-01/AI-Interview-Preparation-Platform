@@ -120,13 +120,20 @@ Analyze this resume for the role of "${role}" in the "${department}" department.
 Resume Text:
 ${pdfData.text}
 
-Provide:
-1. Strengths of the resume.
-2. Weaknesses.
-3. Missing improvements.
-4. Actionable suggestions.
+Provide the response in EXACTLY this format:
 
-Keep the response concise, professional, and easy to understand.
+💪 Strengths
+- Bullet points
+
+⚠ Areas to Improve
+- Bullet points
+
+🚀 Recommended Actions
+- Numbered recommendations
+
+Keep it concise, professional, and easy to read.
+Do NOT write long paragraphs.
+Use proper headings.
 `;
 
     const geminiResult = await model.generateContent(

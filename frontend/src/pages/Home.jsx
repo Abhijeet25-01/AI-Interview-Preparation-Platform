@@ -417,20 +417,35 @@ function Home() {
 <div
   style={{
     marginBottom: "2rem",
-    padding: "1.5rem",
-    borderRadius: "16px",
-    background: "rgba(79, 140, 255, 0.08)",
-    border: "1px solid rgba(79, 140, 255, 0.2)",
+    padding: "2rem",
+    borderRadius: "20px",
+    background:
+      "linear-gradient(135deg, rgba(79,140,255,0.12), rgba(147,51,234,0.08))",
+    border: "1px solid rgba(79, 140, 255, 0.25)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
   }}
 >
-  <h3 style={{ marginBottom: "1rem" }}>
-    🤖 AI Resume Feedback
+  <h3 style={{
+      marginBottom: "1.5rem",
+      fontSize: "1.4rem",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+    }}
+  >
+    🤖 AI Career Coach
   </h3>
 
   <div
     style={{
       whiteSpace: "pre-wrap",
-      lineHeight: "1.8",
+      lineHeight: "2",
+      fontSize: "1rem",
+      color: "rgba(255,255,255,0.92)",
+      background: "rgba(255,255,255,0.04)",
+      padding: "1.5rem",
+      borderRadius: "14px",
+      border: "1px solid rgba(255,255,255,0.08)",
     }}
   >
     {analysis.aiFeedback}
